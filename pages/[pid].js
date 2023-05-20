@@ -38,12 +38,10 @@ export async function getStaticProps(context) {
 
 export async function getStaticPaths() {
   return {
-    paths: [
-      { params: { pid: "p1" } },
-      { params: { pid: "p2" } },
-      { params: { pid: "p3" } },
-    ],
-    fallback: false,
+    paths: [{ params: { pid: "p1" } }],
+    // fallback의 값이 true일 경우 paths에 등록되지 않은 route도 Next.js가 자동으로 불러온다.
+    // 다만, JIT(Just-In-Time)으로 불러오므로, pre-rendering은 진행되지 않는다.
+    fallback: true,
   };
 }
 
