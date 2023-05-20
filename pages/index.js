@@ -22,6 +22,9 @@ export async function getStaticProps() {
     props: {
       products: data.products,
     },
+    // dev server에서는 작동하지 않으며, 오직 build된 결과물에서만 작동한다.
+    // 단위는 초(second)이고, 지정한 시간에 따라서 페이지를 다시 그린다(Re-Generating).
+    revalidate: 10,
   };
 }
 
