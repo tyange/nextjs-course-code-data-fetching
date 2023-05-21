@@ -6,9 +6,9 @@ import { Fragment } from "react";
 function ProductDetailPage(props) {
   const { loadedProduct } = props;
 
-  //   if (!loadedProduct) {
-  //     return <p>Loading...</p>;
-  //   }
+  if (!loadedProduct) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <Fragment>
@@ -35,6 +35,12 @@ export async function getStaticProps(context) {
 
   const product = data.products.find((product) => product.id === productId);
 
+  if (!product) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       loadedProduct: product,
@@ -54,7 +60,7 @@ export async function getStaticPaths() {
     // fallback의 값이 true일 경우 paths에 등록되지 않은 route도 Next.js가 자동으로 불러온다.
     // 다만, JIT(Just-In-Time)으로 불러오므로, pre-rendering은 진행되지 않는다.
     // 문자열 'blocking'을 값으로 지정할 경우 fallback-check 없이도 작동하게 된다.
-    fallback: false,
+    fallback: true,
   };
 }
 
